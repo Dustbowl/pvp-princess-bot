@@ -17,14 +17,13 @@ client.on('ready', (c) => {
 client.on('messageCreate', (message) => {
     if (message.author.bot) return;
 
-    if (message.content.startsWith('!help')) {
-        message.reply('Whatever you desire.');
-    }
-    if (message.content.startsWith('!forecast')) {
-        message.reply('```Sunny```');
-    }
-    if (message.content.startsWith('!job')) {
-        message.reply(getRandomJob());
+    if (message.content === '!job') {
+        var response = getRandomJob();
+        if (response) {
+            message.reply(response);
+        } else {
+            console.log(`Error during !job response: ${response}`);
+        }
     }
 });
 
