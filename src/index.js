@@ -1,5 +1,6 @@
 import { Client, IntentsBitField } from 'discord.js';
 import { getRandomJob } from './services/randomJob.js';
+import { parseForecastTime } from './services/frontlineForecast.js';
 const client = new Client({
     intents : [
         IntentsBitField.Flags.Guilds,
@@ -19,10 +20,21 @@ client.on('messageCreate', (message) => {
 
     if (message.content === '!job') {
         var response = getRandomJob();
-        if (response) {
+        if (response && typeof response === 'string') {
             message.reply(response);
         } else {
             console.log(`Error during !job response: ${response}`);
+            message.reply('Oops! Something went wrong :>');
+        }
+    }
+
+    if(message.content === '!forecast') {
+        var response = parseForecastTime();
+        if (response && typeof response === 'string') {
+            message.reply(response);
+        } else {
+            console.log(`Error during !forecast response: ${response}`);
+            message.reply('Oops! Something went wrong :>');
         }
     }
 });
