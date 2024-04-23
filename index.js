@@ -1,6 +1,7 @@
 import { Client, EmbedBuilder, IntentsBitField } from 'discord.js';
-import { getRandomJob } from './services/randomJob.js';
-import { parseForecastTime } from './services/frontlineForecast.js';
+import { getRandomJob } from './src/services/randomJob.js';
+import { parseForecastTime } from './src/services/frontlineForecast.js';
+import { ErrorEmbed } from './src/services/util.js';
 const client = new Client({
     intents : [
         IntentsBitField.Flags.Guilds,
@@ -36,7 +37,7 @@ client.on('messageCreate', (message) => {
             message.reply(response);
         } else {
             console.log(`Error during !job response: ${response}`);
-            message.reply('Oops! Something went wrong :>');
+            message.reply(ErrorEmbed('!job error'));
         }
     }
 
