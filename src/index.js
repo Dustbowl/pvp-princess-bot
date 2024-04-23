@@ -1,4 +1,4 @@
-import { Client, IntentsBitField } from 'discord.js';
+import { Client, EmbedBuilder, IntentsBitField } from 'discord.js';
 import { getRandomJob } from './services/randomJob.js';
 import { parseForecastTime } from './services/frontlineForecast.js';
 const client = new Client({
@@ -19,12 +19,15 @@ client.on('messageCreate', (message) => {
     if (message.author.bot) return;
 
     if (message.content === '!help') {
-        message.reply('no');
-        return;
-    }
-
-    if(message.content.startsWith('!timestamp')) {
-        return;
+        const helpEmbed = new EmbedBuilder()
+            .setColor(0xFCB0CC)
+            .setTitle('Bot Commands')
+            .addFields(
+                {name: '!help', value: '> List of bot commands'},
+                {name: '!job', value: '> Returns random :job:'},
+                {name: '!forecast [date]', value: '> Returns Frontline Map with timestamps.\n> [date] is optional and is formatted as DD/MM/YY'},
+            )
+        message.reply({embeds: [helpEmbed]});
     }
 
     if (message.content === '!job') {
