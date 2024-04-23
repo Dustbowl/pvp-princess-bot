@@ -30,12 +30,14 @@ client.on('messageCreate', (message) => {
 
     if(message.content === '!forecast') {
         var response = parseForecastTime();
+        message.reply({embeds: [response]});
+        /*
         if (response && typeof response === 'string') {
             message.reply(response);
         } else {
             console.log(`Error during !forecast response: ${response}`);
             message.reply('Oops! Something went wrong :>');
-        }
+        }*/
     }
 });
 
