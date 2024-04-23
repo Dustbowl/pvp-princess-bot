@@ -7,7 +7,7 @@ export function parseForecastTime(forecastDate = 'NOTHING') {
     if (forecastDate === 'NOTHING') {
         var forecast = _getForecast();
     } else {
-        var forecast = _getForecast(moment('2024-04-29 11:00:00', 'YYYY-MM-DD HH:mm:ss'), false);
+        var forecast = _getForecast(moment(forecastDate, 'D-M-YY'), false); //!forecast 26/04/24-0500
     }
     return forecast;
 }
@@ -19,8 +19,8 @@ function _getForecast(forecastDate = moment(), current = true){
         .setThumbnail('https://ffxiv.gamerescape.com/w/images/archive/e/ef/20190729222806%21061806.png')
         .setDescription('Daily reset is at <t:1713884400:T>');
     var timeDifference = forecastDate.diff(anchorDate, 'days');
+    var dateOf = moment(anchorDate).add(timeDifference, 'days');
     if (current) {
-        var dateOf = moment(anchorDate).add(timeDifference, 'days');
         for (let i = 0; i < frontlineMaps.length; i++) {
             embed.addFields({   name: frontlineMaps[(timeDifference + i) % frontlineMaps.length], 
                                 value: "> ".concat(time(dateOf.toDate(), 'R')), 
@@ -29,13 +29,12 @@ function _getForecast(forecastDate = moment(), current = true){
             dateOf.add(1, 'days');
         }
     } else {
-        var dateOf = moment(anchorDate).add(timeDifference - frontlineMaps.length, 'days');
-        for (let i = frontlineMaps.length - 1; i >= 0 ; i--) {
-            dateOf.add(1, 'days');
-            embed.addFields({   name: (frontlineMaps[(timeDifference - i) % frontlineMaps.length]), 
-                                value: time(dateOf.toDate(), 'f').concat(' ', time(dateOf.toDate(), 'R')), 
+        for (let i = 0; i < frontlineMaps.length; i++) {
+            embed.addFields({   name: (frontlineMaps[(timeDifference + i) % frontlineMaps.length]), 
+                                value: "> ".concat(time(dateOf.toDate(), 'f').concat(' - ', time(dateOf.toDate(), 'R'))), 
                                 inline: false},
             );
+            dateOf.add(1, 'days');
         }
     }
     return embed;

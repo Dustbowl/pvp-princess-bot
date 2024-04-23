@@ -18,6 +18,15 @@ client.on('ready', (c) => {
 client.on('messageCreate', (message) => {
     if (message.author.bot) return;
 
+    if (message.content === '!help') {
+        message.reply('no');
+        return;
+    }
+
+    if(message.content.startsWith('!timestamp')) {
+        return;
+    }
+
     if (message.content === '!job') {
         var response = getRandomJob();
         if (response && typeof response === 'string') {
@@ -28,16 +37,14 @@ client.on('messageCreate', (message) => {
         }
     }
 
-    if(message.content === '!forecast') {
-        var response = parseForecastTime();
-        message.reply({embeds: [response]});
-        /*
-        if (response && typeof response === 'string') {
-            message.reply(response);
+    if(message.content.startsWith('!forecast')) {
+        const fields = message.content.split(' ');
+        if(fields.length > 1) {
+            var response = parseForecastTime(fields[1]);
         } else {
-            console.log(`Error during !forecast response: ${response}`);
-            message.reply('Oops! Something went wrong :>');
-        }*/
+            var response = parseForecastTime();
+        }
+        message.reply({embeds: [response]});
     }
 });
 
