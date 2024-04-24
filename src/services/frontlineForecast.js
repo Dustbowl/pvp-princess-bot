@@ -8,8 +8,8 @@ export function parseForecastTime(forecastDate = 'NOTHING') {
     if (forecastDate === 'NOTHING') {
         return _GetForecast();
     } 
+    console.log(forecastDate);
     const specifiedDate = moment(forecastDate, 'D/M/YY', true);
-    console.log(specifiedDate);
     console.log(specifiedDate.isValid()); 
     if (!specifiedDate.isValid()) {
         return ErrorEmbed('Invalid !forecast [date] please use DD/MM/YY !');

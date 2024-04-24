@@ -25,5 +25,7 @@ const jobs = [
 ]
 
 export function getRandomJob() {
-    return jobs[Math.floor(Math.random() * jobs.length)];
+    var job = jobs[Math.floor(Math.random() * jobs.length)];
+    console.log(job);
+    return job;
 }
