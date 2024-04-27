@@ -24,9 +24,9 @@ client.on('messageCreate', (message) => {
             .setColor(0xFCB0CC)
             .setTitle('Bot Commands')
             .addFields(
-                {name: '!help', value: '> List of bot commands'},
-                {name: '!job', value: '> Returns random :job:'},
-                {name: '!forecast [date]', value: '> Returns Frontline Map with timestamps.\n> [date] is optional and is formatted as DD/MM/YY'},
+                {name: '!help', value: '> List of bot commands with basic syntax'},
+                {name: '!job [params]', value: '> Returns random :job: (excluding BLU)\n> [params] is optional, formatted as [job/category/...]'},
+                {name: '!forecast [date]', value: '> Returns Frontline Map with timestamps.\n> [date] is optional and is formatted as [DD/MM/YY]'},
             )
         message.reply({embeds: [helpEmbed]});
     }
@@ -48,15 +48,6 @@ client.on('messageCreate', (message) => {
         }
         message.reply({embeds: [ErrorEmbed('Error during !job. Ensure correct format!')]});
     }
-    /*     if (message.content === '!job') {
-        const response = GetRandomJob();
-        if (response && typeof response === 'string') {
-            message.reply(response);
-        } else {
-            console.log(`Error during !job response: ${response}`);
-            message.reply({embeds: [ErrorEmbed('!job error')]});
-        }
-    }*/
 
     if(message.content.startsWith('!forecast')) {
         const fields = message.content.split(' ');
