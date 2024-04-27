@@ -27,7 +27,7 @@ the number of params can vary from *minimum* one and any number past that
     dps: mnk, drg, nin, sam, rpr, brd, mch, dnc, blm, smn, rdm  
     melee: mnk, drg, nin, sam, rpr  
     ranged: brd, mch, dnc  
-    magic: blm, sam, rdm  
+    caster: blm, sam, rdm  
 
 *It is important to note that the custom pool can be weighted to favor the chances of certain jobs*
 *\(i.e pld/tank/blm will have a pool of \[pld, pld, war, drk, gnb, blm], here 'pld' has double the chance of being selected)*

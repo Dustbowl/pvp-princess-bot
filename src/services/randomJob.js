@@ -12,7 +12,7 @@ class Job {
         return this.#emojiId;
     }
 }
-const categories = ['tank', 'healer', 'dps', 'melee', 'ranged', 'magic'];
+const categories = ['tank', 'healer', 'dps', 'melee', 'ranged', 'caster'];
 const tankPool = [
     new Job('pld', '<:pld:1231445908604850186>'),
     new Job('war', '<:war:1231446013919625286>'),
@@ -37,12 +37,12 @@ const rangedPool = [
     new Job('mch', '<:mch:1231446270543921222>'),
     new Job('dnc', '<:dnc:1231446243973136445>'),
 ];
-const magicPool = [    
+const casterPool = [    
     new Job('blm', '<:blm:1231446229200797698>'),
     new Job('smn', '<:smn:1231446351372357754>'),
     new Job('rdm', '<:rdm:1231446326894530560>'),
 ];
-const dpsPool = meleePool.concat(rangedPool, magicPool);
+const dpsPool = meleePool.concat(rangedPool, casterPool);
 const jobPool = tankPool.concat(tankPool, healerPool, dpsPool);
 
 export function GetRandomJob(args = null) {
@@ -73,8 +73,8 @@ export function GetRandomJob(args = null) {
             case 'ranged':
                 pool = pool.concat(rangedPool);
                 break;
-            case 'magic':
-                pool = pool.concat(magicPool);
+            case 'caster':
+                pool = pool.concat(casterPool);
                 break;
             default:
                 pool = pool.concat(jobPool.find((e) => e.GetName() === element));
