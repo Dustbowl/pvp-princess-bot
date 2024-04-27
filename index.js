@@ -23,6 +23,7 @@ client.on('messageCreate', (message) => {
         const helpEmbed = new EmbedBuilder()
             .setColor(0xFCB0CC)
             .setTitle('Bot Commands')
+            .setURL('https://github.com/Dustbowl/pvp-princess-bot')
             .addFields(
                 {name: '!help', value: '> List of bot commands with basic syntax'},
                 {name: '!job [params]', value: '> Returns random :job: (excluding BLU)\n> [params] is optional, formatted as [job/category/...]'},
