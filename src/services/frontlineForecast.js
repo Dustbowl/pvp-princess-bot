@@ -4,18 +4,16 @@ import { ErrorEmbed } from './util.js';
 const frontlineMaps = ['Fields of Glory (Shatter)', 'Onsal Hakair (Danshig Nadaam)', 'Seal Rock (Seize)'];
 const anchorDate = moment('2024-04-21 00:00:00 +0900', 'YYYY-MM-DD HH:mm:ss ZZ'); //Shatter Anchor Date, GMT 15:00:00 is 00:00:00 in JST which is daily reset time
 
-export function parseForecastTime(forecastDate = 'NOTHING') {
-    if (forecastDate === 'NOTHING') {
+export function parseForecastTime(forecastDate = null) {
+    if (!forecastDate) {
         return _GetForecast();
     } 
-    console.log(forecastDate);
     const specifiedDate = moment(forecastDate, 'D/M/YY', true);
-    console.log(specifiedDate.isValid()); 
     if (!specifiedDate.isValid()) {
-        return ErrorEmbed('Invalid !forecast [date] please use DD/MM/YY !');
+        return null;
     }
     if (specifiedDate.isBefore(anchorDate)) {
-        return ErrorEmbed('Invalid !forecast [date] please use date after '.concat(time(anchorDate.toDate())));
+        return null;
     }
     return _GetForecast(specifiedDate, false);
 }
