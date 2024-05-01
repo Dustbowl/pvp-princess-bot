@@ -1,4 +1,4 @@
-import { Client, EmbedAssertions, EmbedBuilder, IntentsBitField } from 'discord.js';
+import { Client, EmbedBuilder, IntentsBitField } from 'discord.js';
 import { GetRandomJob } from './src/services/randomJob.js';
 import { parseForecastTime } from './src/services/frontlineForecast.js';
 import { ErrorEmbed } from './src/services/util.js';
@@ -14,6 +14,16 @@ const client = new Client({
 //EVENTS
 client.on('ready', (c) => {
     console.log(`${c.user.tag} at your service`);
+});
+
+client.on('guildMemberAdd', (member) => {
+    if (member.guild.id === process.env['GUILD']) {
+        const welcomeChannel = client.channels.cache.get(process.env['WELCOME_CHANNEL']);
+        const onboardingChannel = client.channels.cache.get(process.env['ONBOARDING_CHANNEL']);
+        const message = `👑 Welcome to PVP Princesses, ${member}! We're thrilled to have you join our castle!👑\n` +
+        `To unlock access to more channels, read ${onboardingChannel} to obtain the "Royalty" role.\n`
+        welcomeChannel.send(message);
+    }
 });
 
 client.on('messageCreate', (message) => {
