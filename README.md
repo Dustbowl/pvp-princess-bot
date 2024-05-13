@@ -43,3 +43,11 @@ With no \[date] it uses the current as a 'target'
 With a \[date] it targets that day as a 'target' and gives the Frontline maps in the future  
 \[date] is formatted as **DD/MM/YY** and is calculated in CST \(-0500 GMT) *this leads to a small variance between users*  
 Because of the way the Date() Object works in Javascript, it (trivially) limits the range of values to only dates after the anchor date.  
+
+### **!ship** 
+
+Matching making between 2 users (or a single user)  
+!ship @user @user 
+!ship @user
+
+don't ask me why this exists 
