@@ -1,17 +1,10 @@
 import { EmbedBuilder } from "discord.js";
 export function Matchmake(princess, knight) {
-    if (
-        (princess.id == process.env["PRINCESS"] &&
-            knight.id == process.env["KNIGHT"]) ||
-        (princess.id == process.env["KNIGHT"] &&
-            knight.id == process.env["PRINCESS"])
-    ) {
-        var match = 100;
-    } else {
-        const p = parseInt(princess.id.slice(16));
-        const k = parseInt(knight.id.slice(16));
-        var match = (p + k) % 100 + 1;
-    }
+    const p = parseInt(princess.id.slice(0, 2));
+    const k = parseInt(knight.id.slice(0, 2));
+    const salt = (princess.id.slice(-1) ^ knight.id.slice(-1));
+    const saltVal = princess.id[salt] * knight.id[salt];
+    var match = ((p + k) + saltVal) % 101;
     var bar = "";
     for (let i = 0; i < Math.floor(match / 10); i++) {
         bar = bar.concat("<:filledbar:1239393345705349161>");
