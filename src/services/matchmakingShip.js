@@ -4,7 +4,7 @@ export function Matchmake(princess, knight) {
         (princess.id == process.env['KNIGHT'] && knight.id == process.env['PRINCESS'])) {
         var match = 100;
     } else {
-        var match = Math.abs(( princess.id + knight.id ) % 100) + 1;
+        var match = Math.abs(( princess.id ^ knight.id ) % 100) + 1;
     }
     var bar = "";
     for (let i = 0; i < Math.floor(match/10); i++) {
