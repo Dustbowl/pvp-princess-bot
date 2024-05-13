@@ -2,6 +2,7 @@ import { Client, EmbedBuilder, IntentsBitField } from 'discord.js';
 import { GetRandomJob } from './src/services/randomJob.js';
 import { parseForecastTime } from './src/services/frontlineForecast.js';
 import { ErrorEmbed } from './src/services/util.js';
+import { Matchmake } from './src/services/matchmakingShip.js';
 const client = new Client({
     intents : [
         IntentsBitField.Flags.Guilds,
@@ -76,6 +77,22 @@ client.on('messageCreate', (message) => {
             return;
         }
         message.reply({embeds: [ErrorEmbed('Error during !forecast. Ensure correct format!')]});
+    }
+
+    if(message.content.startsWith('!ship')) {
+        var mentions = message.mentions.members;
+        switch (mentions.size) {
+            case 1:
+                var response = Matchmake(mentions.first(), mentions.first());
+                break;
+            case 2:
+                var response = Matchmake(mentions.first(), mentions.last());
+                break;
+            default:
+                message.reply({embeds: [ErrorEmbed('Error during !ship. Ensure correct format!')]});
+                return;
+        }
+        message.reply({embeds: [response]});
     }
 });
 
