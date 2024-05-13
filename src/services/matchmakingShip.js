@@ -10,7 +10,7 @@ export function Matchmake(princess, knight) {
     } else if (princess.id === knight.id) {
         var match = Math.abs(princess.id % 100) + 1;
     } else {
-        var match = Math.abs((princess.id ^ knight.id) % 100) + 1;
+        var match = Math.abs((parseInt(princess.id) + parseInt(knight.id)) % 100) + 1;
     }
     var bar = "";
     for (let i = 0; i < Math.floor(match / 10); i++) {
