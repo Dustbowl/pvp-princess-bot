@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { time, EmbedBuilder } from 'discord.js'
-import { ErrorEmbed } from './util.js';
 const frontlineMaps = ['Fields of Glory (Shatter)', 'Onsal Hakair (Danshig Nadaam)', 'Seal Rock (Seize)'];
 const anchorDate = moment('2024-04-21 00:00:00 +0900', 'YYYY-MM-DD HH:mm:ss ZZ'); //Shatter Anchor Date, GMT 15:00:00 is 00:00:00 in JST which is daily reset time
 
