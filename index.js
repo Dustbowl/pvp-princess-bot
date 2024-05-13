@@ -39,6 +39,7 @@ client.on('messageCreate', (message) => {
                 {name: '!help', value: '> List of bot commands with basic syntax'},
                 {name: '!job [params]', value: '> Returns random :job: (excluding BLU)\n> [params] is optional, formatted as [job/category/...]'},
                 {name: '!forecast [date]', value: '> Returns Frontline Map with timestamps.\n> [date] is optional and is formatted as [DD/MM/YY]'},
+                {name: '!ship @[user] @[user]', value: "> Matchmaking, *not responsible for any distress due to results*"},
             )
         message.reply({embeds: [helpEmbed]});
     }
