@@ -2,9 +2,9 @@ import { EmbedBuilder } from "discord.js";
 export function Matchmake(princess, knight) {
     const p = parseInt(princess.id.slice(0, 2));
     const k = parseInt(knight.id.slice(0, 2));
-    const salt = (princess.id.slice(-1) ^ knight.id.slice(-1));
+    const salt = princess.id.slice(-1) ^ knight.id.slice(-1);
     const saltVal = princess.id[salt] * knight.id[salt];
-    var match = ((p + k) + saltVal) % 101;
+    var match = (p + k + saltVal * saltVal) % 101;
     var bar = "";
     for (let i = 0; i < Math.floor(match / 10); i++) {
         bar = bar.concat("<:filledbar:1239393345705349161>");
