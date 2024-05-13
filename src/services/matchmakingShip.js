@@ -7,10 +7,10 @@ export function Matchmake(princess, knight) {
             knight.id == process.env["PRINCESS"])
     ) {
         var match = 100;
-    } else if (princess.id === knight.id) {
-        var match = Math.abs(princess.id % 100) + 1;
     } else {
-        var match = Math.abs((parseInt(princess.id) + parseInt(knight.id)) % 100) + 1;
+        const p = parseInt(princess.id.slice(16));
+        const k = parseInt(knight.id.slice(16));
+        var match = (p + k) % 100 + 1;
     }
     var bar = "";
     for (let i = 0; i < Math.floor(match / 10); i++) {
