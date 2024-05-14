@@ -23,11 +23,13 @@ export function Matchmake(princess, knight) {
         .setFields({ name: `The result is...`, value: bar, inline: false });
     return results;
 }
-export function CalculateMatch(princess, knight) {
+export function CalculateMatch(princess, knight, date = new Date()) {
     const p = parseInt(princess.slice(0, 2));
     const k = parseInt(knight.slice(0, 2));
     const salt = princess.slice(-1) ^ knight.slice(-1);
     const saltVal = princess[salt] * knight[salt];
-    const match = (p + k + saltVal * saltVal) % 101;
+    const baseScore = (p + k + saltVal * saltVal) % 101;
+    const seasoning = Math.floor((100 - baseScore) * ((Math.trunc(Math.cos(date.getHours() * saltVal)*100)/100 + 1) / 4));
+    const match = baseScore + seasoning;
     return match;
 }
