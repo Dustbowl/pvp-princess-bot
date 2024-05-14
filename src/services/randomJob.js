@@ -1,4 +1,4 @@
-class Job {
+export class Job {
     #name;
     #emojiId;
     constructor(name, emojiId) {
@@ -13,37 +13,37 @@ class Job {
     }
 }
 const categories = ['tank', 'healer', 'dps', 'melee', 'ranged', 'caster'];
-const tankPool = [
+export const tankPool = [
     new Job('pld', '<:pld:1231445908604850186>'),
     new Job('war', '<:war:1231446013919625286>'),
     new Job('drk', '<:drk:1231446046471753738>'),
     new Job('gnb', '<:gnb:1231446062443532298>')
 ];
-const healerPool = [
+export const healerPool = [
     new Job('whm', '<:whm:1231446129531682897>'),
     new Job('sch', '<:sch:1231446142592614460>'),
     new Job('ast', '<:ast:1231446155561271439>'),
     new Job('sge', '<:sge:1231446168349839462>'),
 ];
-const meleePool = [
+export const meleePool = [
     new Job('mnk', '<:mnk:1231446284150509670>'),
     new Job('drg', '<:drg:1231446257113890937>'),
     new Job('nin', '<:nin:1231446297471615016>'),
     new Job('sam', '<:sam:1231446338986708992>'),
     new Job('rpr', '<:rpr:1231446310222172241>'),
 ];
-const rangedPool = [
+export const rangedPool = [
     new Job('brd', '<:brd:1231446216751972434>'),
     new Job('mch', '<:mch:1231446270543921222>'),
     new Job('dnc', '<:dnc:1231446243973136445>'),
 ];
-const casterPool = [    
+export const casterPool = [    
     new Job('blm', '<:blm:1231446229200797698>'),
     new Job('smn', '<:smn:1231446351372357754>'),
     new Job('rdm', '<:rdm:1231446326894530560>'),
 ];
-const dpsPool = meleePool.concat(rangedPool, casterPool);
-const jobPool = tankPool.concat(tankPool, healerPool, dpsPool);
+export const dpsPool = meleePool.concat(rangedPool, casterPool);
+export const jobPool = tankPool.concat(tankPool, healerPool, dpsPool);
 
 export function GetRandomJob(args = null) {
     if (!args) {
@@ -55,6 +55,10 @@ export function GetRandomJob(args = null) {
             return null;
         }
     }
+    const pool = CreateJobPool(params);
+    return pool[Math.floor(Math.random() * pool.length)].GetEmojiId();
+}
+export function CreateJobPool(params) {
     let pool = [];
     params.forEach(element => {
         switch(element) {
@@ -81,5 +85,5 @@ export function GetRandomJob(args = null) {
                 break;
         }
     });
-    return pool[Math.floor(Math.random() * pool.length)].GetEmojiId();
+    return pool;
 }
