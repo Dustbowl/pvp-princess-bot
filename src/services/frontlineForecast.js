@@ -27,16 +27,20 @@ function _GetForecast(forecastDate = moment(), current = true){
     var dateOf = moment(anchorDate).add(timeDifference, 'days');
     if (current) {
         for (let i = 0; i < frontlineMaps.length; i++) {
-            embed.addFields({   name: frontlineMaps[(timeDifference + i) % frontlineMaps.length], 
-                                value: "> ".concat(time(dateOf.toDate(), 'R')), 
+            const mapName = frontlineMaps[(timeDifference + i) % frontlineMaps.length]
+            const timestamp = "> ".concat(time(dateOf.toDate(), 'R'))
+            embed.addFields({   name: mapName, 
+                                value: timestamp, 
                                 inline: false},
                             );
             dateOf.add(1, 'days');
         }
     } else {
         for (let i = 0; i < frontlineMaps.length; i++) {
-            embed.addFields({   name: (frontlineMaps[(timeDifference + i) % frontlineMaps.length]), 
-                                value: "> ".concat(time(dateOf.toDate(), 'f').concat(' - ', time(dateOf.toDate(), 'R'))), 
+            const mapName = frontlineMaps[(timeDifference + i) % frontlineMaps.length];
+            const timestamp = "> ".concat(time(dateOf.toDate(), 'f').concat(' - ', time(dateOf.toDate(), 'R')));
+            embed.addFields({   name: mapName, 
+                                value: timestamp, 
                                 inline: false},
             );
             dateOf.add(1, 'days');
